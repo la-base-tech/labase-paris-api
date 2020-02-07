@@ -3,7 +3,7 @@
 README.md
 now-config
 .eslintignore
-.eslintrc
+.eslintrc.js
 .prettierignore
 .prettierrc
 yarn.lock

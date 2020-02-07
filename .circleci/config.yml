@@ -5,7 +5,7 @@ references:
     working_directory: ~/project
 
   default_docker_image: &default_docker_image
-    image: circleci/node:13.7.0
+    image: circleci/node:12.15.0
 
   default_docker: &default_docker
     docker:

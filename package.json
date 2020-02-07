@@ -2,5 +2,9 @@
   "name": "labase-paris-api",
   "engines": {
     "node": "12.x"
+  },
+  "scripts": {
+    "now:generate-config": "node ./now-config/generate.js labasetech $NOW_GITHUB_COMMIT_REF",
+    "build": "yarn now:generate-config"
   }
 }

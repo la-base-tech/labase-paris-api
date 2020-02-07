@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "name": "labase-paris-api",
+  "builds": [
+    { "src": "src/api/actions/subscribe.js", "use": "@now/node" },
+    { "src": "src/api/stats/crowdfunding.js", "use": "@now/node" },
+    { "src": "src/api/stripe/payment-intent.js", "use": "@now/node" },
+    { "src": "src/api/stripe/webhook.js", "use": "@now/node" }
+  ],
+  "routes": [
+    {
+      "src": "/actions/subscribe",
+      "dest": "/src/api/actions/subscribe.js"
+    },
+    {
+      "src": "/stats/crowdfunding",
+      "dest": "/src/api/stats/crowdfunding.js"
+    },
+    {
+      "src": "/stripe/payment-intent",
+      "dest": "/src/api/stripe/payment-intent.js"
+    },
+    {
+      "src": "/stripe/webhook",
+      "dest": "/src/api/stripe/webhook.js"
+    }
+  ],
+  "env": {
+    "APP_ENV": "development"
+  }
+}

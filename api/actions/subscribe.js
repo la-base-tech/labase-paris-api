@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const fetch = require('cross-fetch');
+const cors = require('../_utils/cors');
 
 const SENDINBLUE_API_ENDPOINT = 'https://api.sendinblue.com/v3/';
 
@@ -71,7 +72,7 @@ async function addContactToList(email) {
   });
 }
 
-module.exports = async (event, res) => {
+module.exports = cors(async (event, res) => {
   try {
     const data = JSON.parse(event.body);
     await addContactToList(data.email);
@@ -79,4 +80,4 @@ module.exports = async (event, res) => {
   } catch (err) {
     res.status(500).send(err.toString());
   }
-};
+});

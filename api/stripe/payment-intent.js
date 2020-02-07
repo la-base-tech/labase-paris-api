@@ -2,9 +2,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const cors = require('../_utils/cors');
 const stripe = require('./_utils/stripe');
 
-module.exports = async (event, res) => {
+module.exports = cors(async (event, res) => {
   try {
     const data = JSON.parse(event.body);
 
@@ -52,4 +53,4 @@ module.exports = async (event, res) => {
   } catch (err) {
     res.status(500).send(err.toString());
   }
-};
+});

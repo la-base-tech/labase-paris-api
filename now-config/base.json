@@ -1,6 +1,8 @@
 {
   "version": 2,
   "env": {
-    "APP_ENV": "development"
+    "APP_ENV": "development",
+    "SENDINBLUE_API_KEY": "@labase_paris_sendinblue_api_key_development",
+    "SENDINBLUE_LIST_ID": "@labase_paris_sendinblue_list_id_development"
   }
 }

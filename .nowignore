@@ -2,3 +2,8 @@
 .nvmrc
 README.md
 now-config
+.eslintignore
+.eslintrc
+.prettierignore
+.prettierrc
+yarn.lock

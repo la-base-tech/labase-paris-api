@@ -74,8 +74,9 @@ jobs:
               --token $ZEIT_NOW_TOKEN \
               --scope labasetech \
               --no-clipboard \
-              --debug \
+              --confirm \
               --prod
+              
             echo "Successfully deployed to now"      
 
 workflows:

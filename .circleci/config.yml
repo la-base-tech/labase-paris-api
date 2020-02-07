@@ -65,7 +65,10 @@ jobs:
           name: Deploy & Alias to Zeit Now
           command: |
             # Generate the config file for the environment
-            node ./now-config/generate.js labasetech $CIRCLE_BRANCH
+            node ./now-config/generate.js \
+              labase-paris-api \
+              labasetech \
+              $CIRCLE_BRANCH
 
             # Deploy and alias
             # Note: --prod will take the alias into consideration

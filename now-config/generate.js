@@ -2,8 +2,9 @@ const fs = require('fs');
 const config = require('./base.json');
 const productionConfig = require('./production.json');
 
-const team = process.argv[2];
-const branch = process.argv[3];
+const name = process.argv[2];
+const team = process.argv[3];
+const branch = process.argv[4];
 
 if (!team) {
   throw new Error('"team" arg is missing');
@@ -19,12 +20,12 @@ config.alias = [];
 
 // Add production alias
 if (branch === 'master') {
-  config.alias.push(`${config.name}-production-${team}`);
+  config.alias.push(`${name}-production-${team}`);
   Object.assign(config.env, productionConfig.env);
 } else if (branch !== 'dev') {
   // Add staging alias
   if (branch === 'develop') {
-    config.alias.push(`${config.name}-develop-${team}`);
+    config.alias.push(`${name}-develop-${team}`);
   }
   Object.assign(config.env, stagingConfig.env);
 }

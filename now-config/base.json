@@ -3,6 +3,7 @@
   "env": {
     "APP_ENV": "development",
     "SENDINBLUE_API_KEY": "@labase_paris_sendinblue_api_key_development",
-    "SENDINBLUE_LIST_ID": "@labase_paris_sendinblue_list_id_development"
+    "SENDINBLUE_LIST_ID": "@labase_paris_sendinblue_list_id_development",
+    "STRIPE_SECRET_KEY": "@labase_paris_stripe_secret_key_development"
   }
 }

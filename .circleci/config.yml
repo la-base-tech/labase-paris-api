@@ -5,7 +5,7 @@ references:
     working_directory: ~/project
 
   default_docker_image: &default_docker_image
-    image: circleci/node:13.7.0
+    image: circleci/node:12.14.1
 
   default_docker: &default_docker
     docker:
@@ -76,7 +76,7 @@ jobs:
               --no-clipboard \
               --confirm \
               --prod
-              
+
             echo "Successfully deployed to now"      
 
 workflows:

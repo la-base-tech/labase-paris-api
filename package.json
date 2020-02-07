@@ -1,6 +1,6 @@
 {
   "name": "labase-paris-api",
   "engines": {
-    "node": "13.7.x"
+    "node": "12.x"
   }
 }

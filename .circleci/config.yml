@@ -49,6 +49,18 @@ jobs:
           paths:
             - node_modules
 
+  lint:
+    <<: *default_working_directory
+    <<: *default_docker
+
+    steps:
+      - *restore_repo
+      - *restore_dependencies
+
+      - run:
+          name: Run lint
+          command: yarn lint  
+
   deploy: 
     <<: *default_working_directory
     <<: *default_docker
@@ -88,9 +100,13 @@ workflows:
     jobs:
       - checkout
 
+      - lint:
+          required:
+            - checkout
+
       - deploy:
           requires:
-            - checkout
+            - lint
           filters:
             branches:
               only:

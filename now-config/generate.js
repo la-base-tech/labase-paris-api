@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const config = require('./base.json');
 const productionConfig = require('./production.json');
@@ -27,7 +28,6 @@ if (branch === 'master') {
   if (branch === 'develop') {
     config.alias.push(`${name}-develop-${team}`);
   }
-  Object.assign(config.env, stagingConfig.env);
 }
 
 // Generate file

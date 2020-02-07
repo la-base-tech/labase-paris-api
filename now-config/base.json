@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "labase-paris-api",
   "env": {
     "APP_ENV": "development"
   }

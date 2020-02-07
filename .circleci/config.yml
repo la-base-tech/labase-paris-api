@@ -69,14 +69,14 @@ jobs:
 
             # Deploy and alias
             # Note: --prod will take the alias into consideration
-            echo "deploying to now"
+            echo "Deploying to now"
             now \
               --token $ZEIT_NOW_TOKEN \
               --scope labasetech \
               --no-clipboard \
               --debug \
               --prod
-            echo "successfully deployed to now"      
+            echo "Successfully deployed to now"      
 
 workflows:
   version: 2

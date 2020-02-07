@@ -5,9 +5,9 @@ dotenv.config();
 const cors = require('../_utils/cors');
 const stripe = require('./_utils/stripe');
 
-module.exports = cors(async (event, res) => {
+module.exports = cors(async (req, res) => {
   try {
-    const data = JSON.parse(event.body);
+    const data = req.body;
 
     const { paymentIntentId, params } = data;
 

@@ -74,7 +74,7 @@ async function addContactToList(email) {
 
 module.exports = cors(async (event, res) => {
   try {
-    const data = JSON.parse(event.body);
+    const data = event.body;
     await addContactToList(data.email);
     res.status(200).json({ message: 'ok' });
   } catch (err) {

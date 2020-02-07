@@ -101,7 +101,7 @@ workflows:
       - checkout
 
       - lint:
-          required:
+          requires:
             - checkout
 
       - deploy:

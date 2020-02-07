@@ -4,6 +4,8 @@
     "node": "12.x"
   },
   "scripts": {
+    "now:generate-config": "node now-config/generate.js labase-paris-api labasetech dev",
+    "start": "yarn now:generate-config && now dev --debug",
     "format": "prettier --write 'src/**/*.{js}'",
     "lint": "eslint --ext js ."
   },
@@ -14,6 +16,7 @@
     "eslint-config-prettier": "6.10.0",
     "eslint-plugin-import": "2.20.1",
     "eslint-plugin-prettier": "3.1.2",
+    "now": "^17.0.2",
     "prettier": "1.19.1"
   },
   "dependencies": {

@@ -1,0 +1,94 @@
+version: 2.1
+
+references:
+  default_working_directory: &default_working_directory
+    working_directory: ~/project
+
+  default_docker_image: &default_docker_image
+    image: circleci/node:13.7.0
+
+  default_docker: &default_docker
+    docker:
+      - *default_docker_image
+
+  repo_cache_key: &repo_cache_key
+    v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+  restore_repo: &restore_repo
+    restore_cache:
+      key: *repo_cache_key
+
+  dependencies_cache_key: &dependencies_cache_key
+    v1-dependencies-{{ checksum "package.json" }}
+
+  restore_dependencies: &restore_dependencies
+    restore_cache:
+      key: *dependencies_cache_key
+
+jobs:
+  checkout:
+    <<: *default_working_directory
+    <<: *default_docker
+
+    steps:
+      - checkout
+
+      - save_cache:
+          key: *repo_cache_key
+          paths:
+            - ~/project
+
+      - *restore_dependencies
+
+      - run:
+          name: Install dependencies
+          command: yarn install
+
+      - save_cache:
+          key: *dependencies_cache_key
+          paths:
+            - node_modules
+
+  deploy: 
+    <<: *default_working_directory
+    <<: *default_docker
+
+    steps:
+      - *restore_repo
+      - *restore_dependencies
+
+      - run:
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+
+      - run:
+          name: Deploy & Alias to Zeit Now
+          command: |
+            # Generate the config file for the environment
+            node ./now-config/generate.js labasetech $CIRCLE_BRANCH
+
+            # Deploy and alias
+            # Note: --prod will take the alias into consideration
+            echo "deploying to now"
+            now \
+              --token $ZEIT_NOW_TOKEN \
+              --scope labasetech \
+              --no-clipboard \
+              --debug \
+              --prod
+            echo "successfully deployed to now"      
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - checkout
+
+      - deploy:
+          requires:
+            - checkout
+          filters:
+            branches:
+              only:
+                - develop
+                - master

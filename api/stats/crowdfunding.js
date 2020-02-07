@@ -6,11 +6,7 @@ const { getStats } = require('./_utils/stats');
 
 const { APP_ENV } = process.env;
 
-module.exports = async function handler() {
+module.exports = async (req, res) => {
   const stats = await getStats(APP_ENV);
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(stats),
-  };
+  res.status(200).json(stats);
 };

@@ -71,15 +71,12 @@ async function addContactToList(email) {
   });
 }
 
-module.exports = async function handler(event) {
+module.exports = async (event, res) => {
   try {
     const data = JSON.parse(event.body);
     await addContactToList(data.email);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'ok' }),
-    };
+    res.status(200).json({ message: 'ok' });
   } catch (err) {
-    return { statusCode: 500, body: err.toString() };
+    res.status(500).send(err.toString());
   }
 };

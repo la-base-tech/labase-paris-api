@@ -3,7 +3,7 @@ const client = require('./faunadbClient');
 
 const q = faunadb.query;
 
-module.exports = async function getStats(env) {
+exports.getStats = async env => {
   const response = await client.query(
     q.Paginate(q.Match(q.Index('stats_by_environment'), env))
   );

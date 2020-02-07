@@ -4,7 +4,7 @@ dotenv.config();
 
 const stripe = require('./_utils/stripe');
 
-module.exports = async function handler(event) {
+module.exports = async (event, res) => {
   try {
     const data = JSON.parse(event.body);
 
@@ -48,11 +48,8 @@ module.exports = async function handler(event) {
       },
     };
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(response),
-    };
+    res.status(200).json(response);
   } catch (err) {
-    return { statusCode: 500, body: err.toString() };
+    res.status(500).send(err.toString());
   }
 };

@@ -19,6 +19,7 @@
   "dependencies": {
     "cross-fetch": "3.0.4",
     "dotenv": "8.2.0",
+    "faunadb": "2.11.1",
     "stripe": "8.14.0"
   }
 }

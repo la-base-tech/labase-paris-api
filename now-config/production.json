@@ -4,6 +4,7 @@
     "SENDINBLUE_API_KEY": "@labase_paris_sendinblue_api_key_production",
     "SENDINBLUE_LIST_ID": "@labase_paris_sendinblue_list_id_production",
     "STRIPE_SECRET_KEY": "@labase_paris_stripe_secret_key_production",
+    "STRIPE_WEBHOOK_SIGNING_SECRET": "@labase_paris_stripe_webhook_signing_secret_production",
     "FAUNADB_KEY_SECRET": "@labase_paris_faunadb_key_secret_production"
   }
 }

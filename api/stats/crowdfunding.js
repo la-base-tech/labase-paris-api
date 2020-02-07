@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { getStats } = require('./_utils/stats');
+const { getStats } = require('../_utils/stats');
 const cors = require('../_utils/cors');
 
 const { APP_ENV } = process.env;

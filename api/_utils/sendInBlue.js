@@ -21,6 +21,9 @@ async function sendInBlueRequest({ uri, method, body }) {
     params.body = JSON.stringify(body);
   }
   const response = await fetch(`${SENDINBLUE_API_ENDPOINT}${uri}`, params);
+  if (response.status === 204) {
+    return '';
+  }
   const data = await response.json();
   return data;
 }

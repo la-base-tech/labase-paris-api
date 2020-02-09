@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "cross-fetch": "3.0.4",
+    "date-fns": "2.9.0",
     "date-fns-tz": "1.0.9",
     "dotenv": "8.2.0",
     "faunadb": "2.11.1",

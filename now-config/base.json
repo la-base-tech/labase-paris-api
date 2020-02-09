@@ -9,6 +9,8 @@
     "STRIPE_WEBHOOK_STATS_SIGNING_SECRET": "@labase_paris_stripe_webhook_stats_signing_secret_development",
     "STRIPE_WEBHOOK_OHME_SIGNING_SECRET": "@labase_paris_stripe_webhook_ohme_signing_secret_development",
     "STRIPE_WEBHOOK_SEND_IN_BLUE_SIGNING_SECRET": "@labase_paris_stripe_webhook_send_in_blue_signing_secret_development",
-    "FAUNADB_KEY_SECRET": "@labase_paris_faunadb_key_secret_development"
+    "FAUNADB_KEY_SECRET": "@labase_paris_faunadb_key_secret_development",
+    "OHME_CLIENT_NAME": "@labase_paris_ohme_client_name_development",
+    "OHME_CLIENT_SECRET": "@labase_paris_ohme_client_secret_development"
   }
 }

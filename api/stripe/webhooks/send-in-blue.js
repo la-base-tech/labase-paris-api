@@ -8,6 +8,7 @@ const validateStripeRequest = require('./_utils/validateRequest');
 
 const {
   APP_ENV,
+  STRIPE_WEBHOOK_SEND_IN_BLUE_SIGNING_SECRET: STRIPE_WEBHOOK_SIGNING_SECRET,
   SENDINBLUE_LIST_ID_NEWSLETTER,
   SENDINBLUE_LIST_ID_CROWDFUNDING,
 } = process.env;
@@ -16,7 +17,7 @@ module.exports = cors(async (req, res) => {
   let event;
 
   try {
-    event = await validateStripeRequest(req);
+    event = await validateStripeRequest(req, STRIPE_WEBHOOK_SIGNING_SECRET);
   } catch (err) {
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;

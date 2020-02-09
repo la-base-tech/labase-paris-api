@@ -12,7 +12,7 @@ function getRawBody(req) {
   });
 }
 
-async function validateStripeRequest(req) {
+async function validateStripeRequest(req, signingKey) {
   const stripeSignature = req.headers['stripe-signature'];
 
   if (!stripeSignature) {
@@ -21,11 +21,7 @@ async function validateStripeRequest(req) {
 
   const rawBody = await getRawBody(req);
 
-  return stripe.webhooks.constructEvent(
-    rawBody,
-    stripeSignature,
-    process.env.STRIPE_WEBHOOK_SIGNING_SECRET
-  );
+  return stripe.webhooks.constructEvent(rawBody, stripeSignature, signingKey);
 }
 
 module.exports = validateStripeRequest;

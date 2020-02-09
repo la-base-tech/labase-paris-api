@@ -6,13 +6,16 @@ const cors = require('../../_utils/cors');
 const { getStats, updateStats } = require('../../_utils/stats');
 const validateStripeRequest = require('./_utils/validateRequest');
 
-const { APP_ENV } = process.env;
+const {
+  APP_ENV,
+  STRIPE_WEBHOOK_STATS_SIGNING_SECRET: STRIPE_WEBHOOK_SIGNING_SECRET,
+} = process.env;
 
 module.exports = cors(async (req, res) => {
   let event;
 
   try {
-    event = await validateStripeRequest(req);
+    event = await validateStripeRequest(req, STRIPE_WEBHOOK_SIGNING_SECRET);
   } catch (err) {
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;

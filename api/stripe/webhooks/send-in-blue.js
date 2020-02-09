@@ -48,6 +48,7 @@ module.exports = cors(async (req, res) => {
     PRENOM: metadata.firstname,
     NOM: metadata.lastname,
     DON_CF_2020: data.amount / 100,
+    NEWSLETTER: !!(metadata && metadata.subscribe),
   });
 
   // Add the contact the new newsletter list

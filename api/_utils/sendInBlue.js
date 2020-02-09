@@ -25,7 +25,7 @@ async function sendInBlueRequest({ uri, method, body }) {
   return data;
 }
 
-async function getContact(email) {
+async function getContactByEmail(email) {
   const response = await sendInBlueRequest({
     uri: `contacts/${email}`,
     method: 'get',
@@ -36,41 +36,64 @@ async function getContact(email) {
   return response;
 }
 
-function createContact(email) {
+function createContact(email, attributes) {
   return sendInBlueRequest({
     uri: 'contacts',
     method: 'post',
     body: {
       email,
-      listIds: [Number.parseInt(SENDINBLUE_LIST_ID, 10)],
+      attributes: attributes || undefined,
     },
   });
 }
 
-async function addContactToList(email) {
-  const contact = await getContact(email);
+function updateContact(email, attributes) {
+  return sendInBlueRequest({
+    uri: `contacts/${email}`,
+    method: 'put',
+    body: {
+      attributes,
+    },
+  });
+}
+
+async function updateOrCreateContact(email, attributes) {
+  const contact = await getContactByEmail(email);
+
+  // Nothing to update
+  if (contact && !attributes) {
+    return contact;
+  }
 
   // Contact does not exist, create contact and add it to the list
   if (!contact) {
-    createContact(email);
-    return;
+    await createContact(email, attributes);
+  } else {
+    // Update contact
+    await updateContact(email, attributes);
   }
 
+  return getContactByEmail(email);
+}
+
+async function addContactToList(contact, listId) {
   // Contact already in list
   if (contact.listIds.includes(Number.parseInt(SENDINBLUE_LIST_ID, 10))) {
     return;
   }
 
   // Add existing contact to list
-  sendInBlueRequest({
-    uri: `contacts/lists/${SENDINBLUE_LIST_ID}/contacts/add`,
+  await sendInBlueRequest({
+    uri: `contacts/lists/${listId}/contacts/add`,
     method: 'post',
     body: {
-      emails: [email],
+      emails: [contact.email],
     },
   });
 }
 
 module.exports = {
+  getContactByEmail,
+  updateOrCreateContact,
   addContactToList,
 };

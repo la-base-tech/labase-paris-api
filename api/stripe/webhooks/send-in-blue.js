@@ -32,7 +32,7 @@ module.exports = cors(async (req, res) => {
 
   // Test in production
   if (!data.livemode && APP_ENV === 'production') {
-    res.status(200).send('ok');
+    res.status(200).send('skipped (production test)');
     return;
   }
 

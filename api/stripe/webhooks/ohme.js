@@ -7,7 +7,6 @@ const validateStripeRequest = require('./_utils/validateRequest');
 const ohme = require('../../_utils/ohme');
 
 const {
-  APP_ENV,
   STRIPE_WEBHOOK_OHME_SIGNING_SECRET: STRIPE_WEBHOOK_SIGNING_SECRET,
   OHME_CLIENT_NAME,
   OHME_CLIENT_SECRET,
@@ -75,9 +74,9 @@ module.exports = cors(async (req, res) => {
 
   const data = event.data.object;
 
-  // Test in production
-  if (!data.livemode && APP_ENV === 'production') {
-    res.status(200).send('ok');
+  // Skip tests to avoid messing with Ohme stats
+  if (!data.livemode) {
+    res.status(200).send('skipped (not live mode)');
     return;
   }
 

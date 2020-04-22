@@ -72,13 +72,13 @@ module.exports = cors(async (req, res) => {
     return;
   }
 
-  const data = event.data.object;
-
   // Skip tests to avoid messing with Ohme stats
-  if (!data.livemode) {
+  if (!event.livemode) {
     res.status(200).send('skipped (not live mode)');
     return;
   }
+
+  const data = event.data.object;
 
   const ohmeAuthParams = {
     clientName: OHME_CLIENT_NAME,

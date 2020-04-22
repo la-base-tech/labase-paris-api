@@ -28,13 +28,13 @@ module.exports = cors(async (req, res) => {
     return;
   }
 
-  const data = event.data.object;
-
-  // Test in production
-  if (!data.livemode && APP_ENV === 'production') {
+  // Skip tests in production
+  if (!event.livemode && APP_ENV === 'production') {
     res.status(200).send('skipped (production test)');
     return;
   }
+
+  const data = event.data.object;
 
   const { metadata } = data;
 
